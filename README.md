@@ -106,4 +106,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - Inspired by the original Kaizoku Fansubs team
 - Built with React, TensorFlow.js, and WebSocket technology
-- Special thanks to the anime community for their support 
+- Special thanks to the anime community for their support
+
+**Credits:**
+This project benefited from AI code assistance by [Cursor](https://www.cursor.com/). 

@@ -54,5 +54,8 @@
     "@types/fluent-ffmpeg": "^2.1.0",
     "ts-node": "^10.9.0",
     "nodemon": "^3.0.0"
+  },
+  "credits": {
+    "cursor-ai": "@https://www.cursor.com/"
   }
 } 
