@@ -1,0 +1,90 @@
+{
+  "default": {
+    "fontFamily": "Impact, sans-serif",
+    "fontSize": "2rem",
+    "textShadow": "2px 2px 4px rgba(0, 0, 0, 0.5)",
+    "animationDuration": "0.5s"
+  },
+  "animations": {
+    "color-flow": {
+      "description": "Text color flows from white to yellow with black border",
+      "keyframes": [
+        {
+          "time": "0%",
+          "color": "#FFFFFF",
+          "textShadow": "2px 2px 4px #000000"
+        },
+        {
+          "time": "100%",
+          "color": "#FFD700",
+          "textShadow": "2px 2px 4px #000000"
+        }
+      ],
+      "timing": "ease-in-out"
+    },
+    "slide-in": {
+      "description": "Text slides in from bottom",
+      "keyframes": [
+        {
+          "time": "0%",
+          "transform": "translateY(100%)",
+          "opacity": "0"
+        },
+        {
+          "time": "100%",
+          "transform": "translateY(0)",
+          "opacity": "1"
+        }
+      ],
+      "timing": "cubic-bezier(0.4, 0, 0.2, 1)"
+    },
+    "fade-in": {
+      "description": "Text fades in with glow effect",
+      "keyframes": [
+        {
+          "time": "0%",
+          "opacity": "0",
+          "textShadow": "0 0 10px rgba(255, 255, 255, 0)"
+        },
+        {
+          "time": "100%",
+          "opacity": "1",
+          "textShadow": "0 0 20px rgba(255, 255, 255, 0.8)"
+        }
+      ],
+      "timing": "ease-out"
+    }
+  },
+  "characterStyles": {
+    "luffy": {
+      "attackPrefix": "Gomu Gomu no",
+      "baseColor": "#FFD700",
+      "accentColor": "#FF4500",
+      "animationType": "color-flow"
+    },
+    "zoro": {
+      "attackPrefix": "Santoryu",
+      "baseColor": "#32CD32",
+      "accentColor": "#006400",
+      "animationType": "slide-in"
+    },
+    "sanji": {
+      "attackPrefix": "Diable Jambe",
+      "baseColor": "#FF4500",
+      "accentColor": "#FFD700",
+      "animationType": "fade-in"
+    }
+  },
+  "specialEffects": {
+    "impact": {
+      "scale": 1.2,
+      "duration": 0.3,
+      "easing": "cubic-bezier(0.4, 0, 0.2, 1)"
+    },
+    "flash": {
+      "opacity": [0, 1, 0],
+      "duration": 0.2,
+      "easing": "steps(3)"
+    }
+  }
+} 
