@@ -1,38 +1,42 @@
-import { keyframes } from '@emotion/react';
-
-// Base animation keyframes
-export const colorFlow = keyframes`
-  0% {
-    color: #FFFFFF;
-    text-shadow: 2px 2px 4px #000000;
-  }
-  100% {
-    color: #FFD700;
-    text-shadow: 2px 2px 4px #000000;
-  }
-`;
-
-export const slideIn = keyframes`
-  0% {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-`;
-
-export const fadeIn = keyframes`
-  0% {
-    opacity: 0;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0);
-  }
-  100% {
-    opacity: 1;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-  }
-`;
+// Animation keyframe definitions (used in CSS)
+export const animationKeyframes = {
+  colorFlow: `
+    @keyframes colorFlow {
+      0% {
+        color: #FFFFFF;
+        text-shadow: 2px 2px 4px #000000;
+      }
+      100% {
+        color: #FFD700;
+        text-shadow: 2px 2px 4px #000000;
+      }
+    }
+  `,
+  slideIn: `
+    @keyframes slideIn {
+      0% {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  `,
+  fadeIn: `
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0);
+      }
+      100% {
+        opacity: 1;
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+      }
+    }
+  `
+};
 
 // SVG path definitions for special effects
 export const svgPaths = {
@@ -53,19 +57,19 @@ export const svgPaths = {
 // Animation presets
 export const animationPresets = {
   gomuGomu: {
-    keyframes: colorFlow,
+    keyframes: 'colorFlow',
     duration: '0.5s',
     timing: 'ease-in-out',
     iterationCount: 1,
   },
   santoryu: {
-    keyframes: slideIn,
+    keyframes: 'slideIn',
     duration: '0.3s',
     timing: 'cubic-bezier(0.4, 0, 0.2, 1)',
     iterationCount: 1,
   },
   diableJambe: {
-    keyframes: fadeIn,
+    keyframes: 'fadeIn',
     duration: '0.4s',
     timing: 'ease-out',
     iterationCount: 1,
@@ -86,7 +90,10 @@ export const generateAnimation = (
 ) => {
   const preset = animationPresets[type];
   return {
-    animation: `${preset.keyframes} ${customDuration || preset.duration} ${preset.timing} ${preset.iterationCount}`,
+    animationName: preset.keyframes,
+    animationDuration: customDuration || preset.duration,
+    animationTimingFunction: preset.timing,
+    animationIterationCount: preset.iterationCount,
   };
 };
 

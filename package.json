@@ -14,11 +14,9 @@
     "postcss": "^8.4.0",
     "autoprefixer": "^10.4.0",
     "playwright": "^1.41.0",
-    "tensorflow": "^4.17.0",
     "@tensorflow/tfjs-node": "^4.17.0",
     "ffmpeg-static": "^5.2.0",
     "fluent-ffmpeg": "^2.1.2",
-    "node-audio-recorder": "^1.4.0",
     "express": "^4.18.0",
     "socket.io": "^4.7.0",
     "socket.io-client": "^4.7.0"
@@ -28,7 +26,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "ts-node src/server/index.ts",
+    "server": "ts-node --project tsconfig.server.json src/server/index.ts",
     "analyze": "ts-node src/analysis/videoAnalyzer.ts"
   },
   "eslintConfig": {

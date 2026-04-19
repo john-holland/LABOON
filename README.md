@@ -19,6 +19,14 @@ Haam!
   - Fade-in transitions
   - Custom SVG animations
 
+## Wish List
+
+- Server structured to contain subs and community episode edits, gradeable for accuracy and effect work
+  - integration with imgur / reddit / mumble / discord for chat servers and / or group episode watching
+  - episode number tracking
+  - SAASy coverage for other animes
+- (i think it already has but i haven't reviewed in a while) the ability to use keyboard shortcuts
+
 ## Prerequisites
 
 - Node.js 16+

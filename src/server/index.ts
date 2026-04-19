@@ -1,6 +1,6 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { createServer } from 'http';
-import { Server } from 'socket.io';
+import { Server, Socket } from 'socket.io';
 import { VideoAnalyzer } from '../analysis/videoAnalyzer';
 import path from 'path';
 
@@ -19,10 +19,23 @@ const videoAnalyzer = new VideoAnalyzer();
 const analysisResults = new Map<string, any>();
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../../public')));
+// Serve static files from public directory
+app.use(express.static(path.join(process.cwd(), 'public')));
+
+// Health check endpoint
+app.get('/', (req: Request, res: Response) => {
+  res.json({ 
+    status: 'running', 
+    message: 'Anime Subtitle Enhancement Server',
+    endpoints: {
+      analyze: 'POST /api/analyze',
+      health: 'GET /'
+    }
+  });
+});
 
 // Endpoint to start video analysis
-app.post('/api/analyze', async (req, res) => {
+app.post('/api/analyze', async (req: Request, res: Response) => {
   const { videoPath } = req.body;
   
   if (!videoPath) {
@@ -40,7 +53,7 @@ app.post('/api/analyze', async (req, res) => {
 });
 
 // WebSocket connection handling
-io.on('connection', (socket) => {
+io.on('connection', (socket: Socket) => {
   console.log('Client connected');
 
   socket.on('requestAnalysis', (videoPath: string) => {
@@ -56,7 +69,7 @@ io.on('connection', (socket) => {
 });
 
 // Handle video analyzer events
-videoAnalyzer.on('frameProcessed', (frame) => {
+videoAnalyzer.on('frameProcessed', (frame: any) => {
   io.emit('frameUpdate', frame);
 });
 

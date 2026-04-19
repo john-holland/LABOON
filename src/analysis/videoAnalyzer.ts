@@ -1,5 +1,5 @@
 import * as tf from '@tensorflow/tfjs-node';
-import * as ffmpeg from 'fluent-ffmpeg';
+import ffmpeg from 'fluent-ffmpeg';
 import { Browser, chromium } from 'playwright';
 import { EventEmitter } from 'events';
 
@@ -29,8 +29,14 @@ export class VideoAnalyzer extends EventEmitter {
   }
 
   private async initializeModel() {
-    // Load pre-trained model for object detection
-    this.model = await tf.loadLayersModel('file://./models/object_detection/model.json');
+    try {
+      // Load pre-trained model for object detection
+      // Model may not exist initially, so we'll handle that gracefully
+      this.model = await tf.loadLayersModel('file://./models/object_detection/model.json');
+    } catch (error) {
+      console.warn('Model not found, continuing without ML model:', error);
+      this.model = null;
+    }
   }
 
   async analyzeVideo(videoPath: string): Promise<FrameAnalysis[]> {
@@ -49,15 +55,15 @@ export class VideoAnalyzer extends EventEmitter {
         '-pix_fmt rgb24',
         '-vf fps=30'
       ])
-      .on('start', (commandLine) => {
+      .on('start', (commandLine: string) => {
         console.log('Started FFmpeg with command:', commandLine);
       })
-      .on('error', (err) => {
+      .on('error', (err: Error) => {
         console.error('Error:', err);
       });
 
     // Process frames
-    command.pipe().on('data', async (chunk) => {
+    command.pipe().on('data', async (chunk: Buffer) => {
       const frame = await this.processFrame(chunk);
       frames.push(frame);
       this.emit('frameProcessed', frame);

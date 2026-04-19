@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "noEmit": false,
+    "outDir": "./dist"
+  },
+  "include": ["src/server/**/*", "src/analysis/**/*"],
+  "exclude": ["node_modules", "src/components/**/*", "src/styles/**/*"]
+}
+
+
+
+
